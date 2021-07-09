@@ -1,9 +1,9 @@
 package com.stockmarket.stock.repo.intf;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.cassandra.repository.CassandraRepository;
 
-import com.stockmarket.stock.entity.Stock;
+import com.stockmarket.stock.entity.StockEntity;
 
-public interface StockRepository  extends CrudRepository<Stock, Long>{
+public interface StockRepository extends CassandraRepository<StockEntity, Long> {
 
 }

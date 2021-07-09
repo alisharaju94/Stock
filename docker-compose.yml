@@ -1,0 +1,14 @@
+version: '3.1'
+services:
+ cassandra-n1:
+  image: cassandra:3.11
+  volumes:
+   - ./data:/usr/workspace
+  ports:
+   - 9042:9042
+  networks:
+   - cassandra
+networks:
+ cassandra:
+volumes:
+ data:
