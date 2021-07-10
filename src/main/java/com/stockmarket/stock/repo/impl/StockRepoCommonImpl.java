@@ -9,13 +9,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.cassandra.core.CassandraOperations;
-import org.springframework.expression.spel.ast.StringLiteral;
 import org.springframework.stereotype.Component;
 
-import com.datastax.oss.driver.api.querybuilder.Literal;
-import com.datastax.oss.driver.api.querybuilder.QueryBuilder;
-import com.datastax.oss.driver.api.querybuilder.Raw;
-import com.datastax.oss.driver.api.querybuilder.select.Selector;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.stockmarket.stock.entity.StockDetails;
@@ -32,9 +27,9 @@ public class StockRepoCommonImpl {
 	private CassandraOperations template;
 
 	public StockDetails insertStock(StockDetails stockDetails) {
-		long count = stockCommonOpRepo.count() + 1;
+		long count = stockCommonOpRepo.count();
 		for (StockEntity entity : stockDetails.getStocks()) {
-			entity.setSequenceNo(++count);
+			entity.setSequence(++count);
 		}
 		List<StockEntity> entities = stockCommonOpRepo.saveAll(stockDetails.getStocks());
 		stockDetails.setStocks(entities);
@@ -45,7 +40,8 @@ public class StockRepoCommonImpl {
 
 	private void checkForBackUp(long count) {
 		if (count % 10000 == 0) {
-			//QueryBuilder.selectFrom("stock").all().whereColumn("sequence_no").build(">", QueryBuilder.literal(count-1000)).;
+			// QueryBuilder.selectFrom("stock").all().whereColumn("sequence_no").build(">",
+			// QueryBuilder.literal(count-1000)).;
 			String slctQuery = "SELECT * FROM stock WHERE sequence_no > " + (count - 1000) + " and sequence_no <= "
 					+ count + " ALLOW FILTERING";
 			List<StockEntity> entities = template.select(slctQuery, StockEntity.class);

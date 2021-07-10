@@ -49,6 +49,7 @@ public class DataMapper {
 			stock.setTimeStamp(entity.getTimeStamp());
 			stocks.add(stock);
 		});
+		res.setStockDetails(stocks);
 		return res;
 	}
 
