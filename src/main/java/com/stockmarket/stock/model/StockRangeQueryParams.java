@@ -1,16 +1,21 @@
 package com.stockmarket.stock.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 import lombok.Data;
 
+/**
+ * @author ALISH
+ *
+ */
 @Data
-public class Stock implements Serializable {
+public class StockRangeQueryParams implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private BigDecimal price;
-	private String currencyCode;
-	private Timestamp timeStamp;
+	
+	private long companyCode;
+	private Timestamp start;
+	private Timestamp end;
+
 }

@@ -19,9 +19,4 @@ public class StockDetail implements Serializable {
 	@ApiModelProperty(notes = "Stock name", example = "XYZ1 stock")
 	private String name;
 
-	@ApiModelProperty(notes = "Price of a unit", example = "30.15")
-	private BigDecimal price;
-
-	@ApiModelProperty(notes = "Currency code. This should be a 3 letter code.", example = "INR")
-	private String currencyCode;
 }

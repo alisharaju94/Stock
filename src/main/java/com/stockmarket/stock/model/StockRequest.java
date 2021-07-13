@@ -1,6 +1,8 @@
 package com.stockmarket.stock.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.List;
 
 import io.swagger.annotations.ApiModel;
@@ -13,7 +15,10 @@ public class StockRequest implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@ApiModelProperty(name = "stocks")
-	private List<StockDetail> stocks;
+	@ApiModelProperty(notes = "Price of a unit", example = "30.15")
+	private BigDecimal price;
+
+	@ApiModelProperty(notes = "Currency code. This should be a 3 letter code.", example = "INR")
+	private String currencyCode;
 
 }
