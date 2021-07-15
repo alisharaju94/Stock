@@ -5,7 +5,6 @@ import java.security.NoSuchAlgorithmException;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import com.stockmarket.stock.entity.StockDetails;
 import com.stockmarket.stock.entity.StockEntity;
@@ -28,24 +27,25 @@ public class StockServiceImpl implements StockService {
 	@Override
 	public Stock addStock(StockRequest stock, String companyCode) throws NoSuchAlgorithmException {
 		StockEntity entity = dataMapper.mapToEntity(stock, companyCode);
-		entity= stockRepoImpl.insertStock(entity);
+		entity = stockRepoImpl.insertStock(entity);
 		return dataMapper.mapToResponseEntity(entity);
 	}
 
 	@Override
 	public StockResponse getStock(StockRangeQueryParams params) {
-		if(!ObjectUtils.isEmpty(params.getStart()) || !ObjectUtils.isEmpty(params.getEnd())) {
-			StockDetails stockDetails = stockRepoImpl.getStockForRange(params);
-			return dataMapper.mapToResponseEntityList(stockDetails);
+		StockDetails stockDetails = null;
+		if (!ObjectUtils.isEmpty(params.getStart()) || !ObjectUtils.isEmpty(params.getEnd())) {
+			stockDetails = stockRepoImpl.getStockForRange(params);
+		} else {
+			stockDetails = stockRepoImpl.getStocksOfCompany(params.getCompanyCode());
 		}
-		return null;
+		return dataMapper.mapToResponseEntityList(stockDetails);
 	}
 
 	@Override
 	public void delete(String companyCode) {
 		stockRepoImpl.deleteStocks(companyCode);
-		
-	}
 
+	}
 
 }

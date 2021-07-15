@@ -39,7 +39,7 @@ public class StockRepoCommonImpl {
 
 	public StockDetails getStockForRange(StockRangeQueryParams params) {
 		StockDetails stockDetails = new StockDetails();
-		String query = " SELECT * FROM stock WHERE company_code = " + params.getCompanyCode() + " and time_stamp >= '"
+		String query = " SELECT * FROM stock WHERE com_code = '" + params.getCompanyCode() + "' and time_stamp >= '"
 				+ params.getStart() + "' and time_stamp <= '" + params.getEnd() + "' allow filtering";
 		List<StockEntity> entities = template.select(query, StockEntity.class);
 		stockDetails.setStocks(entities);
@@ -52,7 +52,7 @@ public class StockRepoCommonImpl {
 			Select slectQuery = QueryBuilder.selectFrom("stock").all().limit(3);
 			List<StockEntity> entities = template.select(slectQuery.asCql(), StockEntity.class);
 			try {
-				File file = new File("/stock/data/Stock_backup_" + CommonConstants.today()+ ".csv");
+				File file = new File("/stock/data/Stock_backup_" + CommonConstants.today() + ".csv");
 				file.createNewFile();
 				Writer writer = Files.newBufferedWriter(file.toPath());
 				StatefulBeanToCsv<StockEntity> beanToCsv = new StatefulBeanToCsvBuilder<StockEntity>(writer).build();
@@ -64,11 +64,22 @@ public class StockRepoCommonImpl {
 		}
 	}
 
-	public void deleteStocks(String companyCode) {
-		Select selectQuery = QueryBuilder.selectFrom("stock").all()
-				.where(Relation.column("com_code").isEqualTo(QueryBuilder.literal(companyCode)));
-		List<StockEntity> entities = template.select(selectQuery.asCql(), StockEntity.class);
+	public void deleteStocks(String comCode) {
+		List<StockEntity> entities = getAllStocks(comCode);
 		stockCommonOpRepo.deleteAll(entities);
+	}
+
+	public StockDetails getStocksOfCompany(String comCode) {
+		StockDetails details = new StockDetails();
+		List<StockEntity> entities = getAllStocks(comCode);
+		details.setStocks(entities);
+		return details;
+	}
+
+	private List<StockEntity> getAllStocks(String comCode) {
+		Select selectQuery = QueryBuilder.selectFrom("stock").all()
+				.where(Relation.column("com_code").isEqualTo(QueryBuilder.literal(comCode)));
+		return template.select(selectQuery.asCql(), StockEntity.class);
 	}
 
 }
