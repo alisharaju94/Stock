@@ -1,6 +1,5 @@
 package com.stockmarket.stock.mapper;
 
-import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
