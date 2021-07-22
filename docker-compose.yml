@@ -1,7 +1,14 @@
 version: '3.1'
 services:
- stock:
-  build: .
-  container_name: stock
+ cassandra-n1:
+  image: cassandra:3.11
+  volumes:
+   - ./data:/usr/workspace
   ports:
-   - 8083:8083
+   - 9042:9042
+  networks:
+   - cassandra
+networks:
+ cassandra:
+volumes:
+ data:

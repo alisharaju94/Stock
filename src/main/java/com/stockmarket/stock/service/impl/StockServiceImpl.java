@@ -1,7 +1,10 @@
 package com.stockmarket.stock.service.impl;
 
+import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Timestamp;
 
+import com.stockmarket.stock.repo.intf.StockDataRepository;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +19,16 @@ import com.stockmarket.stock.model.StockRequest;
 import com.stockmarket.stock.repo.impl.StockRepoCommonImpl;
 import com.stockmarket.stock.service.intf.StockService;
 
+import javax.inject.Inject;
+
 @Service
 public class StockServiceImpl implements StockService {
+
+	private final StockDataRepository stockDataRepository;
+	@Inject
+	public StockServiceImpl(StockDataRepository stockDataRepository){
+		this.stockDataRepository=stockDataRepository;
+	}
 
 	@Autowired
 	private DataMapper dataMapper;
@@ -32,19 +43,12 @@ public class StockServiceImpl implements StockService {
 	}
 
 	@Override
-	public StockResponse getStock(StockRangeQueryParams params) {
-		StockDetails stockDetails = null;
-		if (!ObjectUtils.isEmpty(params.getStart()) || !ObjectUtils.isEmpty(params.getEnd())) {
-			stockDetails = stockRepoImpl.getStockForRange(params);
-		} else {
-			stockDetails = stockRepoImpl.getStocksOfCompany(params.getCompanyCode());
+	public void saveStockData(StockEntity stockEntity){
+		try {
+			stockDataRepository.save(stockEntity);
+		} catch(IllegalArgumentException illegalArgumentException){
+			throw new IllegalArgumentException(illegalArgumentException.getMessage());
 		}
-		return dataMapper.mapToResponseEntityList(stockDetails);
-	}
-
-	@Override
-	public void delete(String companyCode) {
-		stockRepoImpl.deleteStocks(companyCode);
 
 	}
 

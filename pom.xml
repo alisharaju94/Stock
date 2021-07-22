@@ -16,16 +16,18 @@
 	<description>Stock Service application</description>
 	<properties>
 		<java.version>1.8</java.version>
+		<spring-data-dynamodb.version>5.0.4</spring-data-dynamodb.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!-- Cassandra -->
+		<!--Amazon Dynamo -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-cassandra</artifactId>
+			<groupId>com.github.derjust</groupId>
+			<artifactId>spring-data-dynamodb</artifactId>
+			<version>${spring-data-dynamodb.version}</version>
 		</dependency>
 		<!-- Lombok -->
 		<dependency>

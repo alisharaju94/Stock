@@ -3,26 +3,27 @@ package com.stockmarket.stock.entity;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-import org.springframework.data.cassandra.core.cql.Ordering;
-import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
-import org.springframework.data.cassandra.core.mapping.Column;
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
-import org.springframework.data.cassandra.core.mapping.Table;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+
 
 import lombok.Data;
 
-@Table(value = "stock")
 @Data
+@DynamoDBTable(tableName = "stock")
 public class StockEntity {
 
-	@PrimaryKey
-	private StockPrimaryKey primaryKey;
-	
-	@Column(value = "com_code")
-	private String comCode;
 
-	@Column(value = "currency_code")
+	@DynamoDBHashKey(attributeName = "price")
+	private BigDecimal price;
+
+	@DynamoDBAttribute(attributeName = "time_stamp")
+	private Timestamp timeStamp;
+
+	
+	@DynamoDBAttribute(attributeName = "comCode")
+	private String comCode;
 	private String currencyCode;
 
 }

@@ -45,7 +45,7 @@ public class StockController {
 			throws NoSuchAlgorithmException {
 		return stockService.addStock(stock, companyCode);
 	}
-
+	
 	@PostMapping
 	public StockResponse getStock(@RequestBody StockRangeQueryParams params) {
 		return stockService.getStock(params);
@@ -56,4 +56,5 @@ public class StockController {
 		 stockService.delete(companyCode);
 		 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
+
 }
