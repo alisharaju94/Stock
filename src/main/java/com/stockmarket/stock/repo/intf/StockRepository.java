@@ -1,10 +1,9 @@
 package com.stockmarket.stock.repo.intf;
 
-import org.springframework.data.cassandra.repository.CassandraRepository;
-
 import com.stockmarket.stock.entity.StockEntity;
-import com.stockmarket.stock.entity.StockPrimaryKey;
+import org.socialsignin.spring.data.dynamodb.repository.DynamoDBCrudRepository;
+import org.socialsignin.spring.data.dynamodb.repository.EnableScan;
 
-public interface StockRepository extends CassandraRepository<StockEntity, StockPrimaryKey> {
-
+@EnableScan
+public interface StockRepository extends DynamoDBCrudRepository<StockEntity, String> {
 }

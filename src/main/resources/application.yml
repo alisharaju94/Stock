@@ -2,12 +2,21 @@
 server:
  port: 8083
 
-spring:
- data:
-  cassandra:
-   contact-points: 127.0.0.1
-   local-datacenter: datacenter1
-   keyspace-name: stockmarket
-   username: admin
-   password: adminUser
-   port: 9042
+#Local AWS Dynamodb Config
+local:
+ amazon:
+  dynamodb:
+   mode: local
+   endpoint: http://localhost:8000/
+   credentials:
+    access-key: key
+    secret-key: key2
+   signingregion: ap-south-1
+   record-expiration: 15552000
+
+#AWS Dynamodb Config
+amazon:
+ dynamodb:
+  mode: remote
+  signingregion: us-west-2
+  record-expiration: 15552000
