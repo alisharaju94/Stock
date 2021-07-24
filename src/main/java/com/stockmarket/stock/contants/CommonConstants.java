@@ -11,6 +11,11 @@ public class CommonConstants {
 	private CommonConstants() {
 		
 	}
+	
+	public static final String STOCK_TABLE = "stock";
+
+	public static final String STOCK_INDEX= "stock-index";
+	public static final String DYNAMO_SORT_KEY = "time_stamp";
 
 	public static String getRandomID(int seed) throws NoSuchAlgorithmException {
 		Random random = SecureRandom.getInstanceStrong();

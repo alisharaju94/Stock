@@ -20,7 +20,7 @@ public class DataMapper {
 		StockEntity entity = new StockEntity();
 		entity.setComCode(companyCode);
 		entity.setPrice(stockReq.getPrice());
-		entity.setTimeStamp(Timestamp.from(Instant.now()));
+		entity.setTimeStamp(Instant.now().toEpochMilli());
 		entity.setCurrencyCode(stockReq.getCurrencyCode());
 		return entity;
 

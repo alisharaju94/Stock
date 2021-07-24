@@ -12,5 +12,5 @@ public class Stock implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private BigDecimal price;
 	private String currencyCode;
-	private Timestamp timeStamp;
+	private long timeStamp;
 }

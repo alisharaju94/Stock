@@ -15,7 +15,7 @@ public class StockRangeQueryParams implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String companyCode;
-	private Timestamp start;
-	private Timestamp end;
+	private long start;
+	private long end;
 
 }
