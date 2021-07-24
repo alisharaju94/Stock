@@ -3,22 +3,22 @@ server:
  port: 8083
 
 #Local AWS Dynamodb Config
-amazon:
- dynamodb:
-  mode: local
-  endpoint: http://localhost:8000/
-  credentials:
-   access-key: key
-   secret-key: key2
-  signingregion: ap-south-1
-  record-expiration: 15552000
-
-#AWS Dynamodb cloud Config
 # amazon:
 #  dynamodb:
-#   mode: remote
+#   mode: local
+#   endpoint: http://localhost:8000/
 #   credentials:
-#    access-key: AKIASQATGCL3AIWIN3MH
-#    secret-key: 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
+#    access-key: key
+#    secret-key: key2
 #   signingregion: ap-south-1
 #   record-expiration: 15552000
+
+#AWS Dynamodb cloud Config
+amazon:
+ dynamodb:
+  mode: remote
+  credentials:
+   access-key: AKIASQATGCL3AIWIN3MH
+   secret-key: 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
+  signingregion: ap-south-1
+  record-expiration: 15552000
