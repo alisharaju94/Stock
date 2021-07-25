@@ -17,6 +17,7 @@ server:
 amazon:
  dynamodb:
   mode: remote
+#   endpoint: remote
   credentials:
    access-key: AKIASQATGCL3AIWIN3MH
    secret-key: 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

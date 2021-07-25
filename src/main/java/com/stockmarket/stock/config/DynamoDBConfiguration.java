@@ -20,7 +20,7 @@ public class DynamoDBConfiguration {
 	private static final Logger LOGGER = LoggerFactory.getLogger(DynamoDBConfiguration.class);
 	private static final String DYNAMO_DB_MODE_REMOTE = "remote";
 
-	@Value("${amazon.dynamodb.endpoint}")
+//	@Value("${amazon.dynamodb.endpoint}")
 	private String amazonDynamoDBEndpoint;
 
 	@Value("${amazon.dynamodb.credentials.access-key}")
