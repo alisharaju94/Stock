@@ -1,8 +1,5 @@
 package com.stockmarket.stock.query.repo.impl;
 
-import java.io.File;
-import java.io.Writer;
-import java.nio.file.Files;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +9,6 @@ import org.springframework.stereotype.Component;
 import com.datastax.oss.driver.api.querybuilder.QueryBuilder;
 import com.datastax.oss.driver.api.querybuilder.relation.Relation;
 import com.datastax.oss.driver.api.querybuilder.select.Select;
-import com.opencsv.bean.StatefulBeanToCsv;
-import com.opencsv.bean.StatefulBeanToCsvBuilder;
-import com.stockmarket.stock.common.constants.CommonConstants;
 import com.stockmarket.stock.query.entity.StockDetails;
 import com.stockmarket.stock.query.entity.StockEntity;
 import com.stockmarket.stock.query.model.StockRangeQueryParams;
@@ -31,8 +25,8 @@ public class StockQueryRepoImpl {
 
 	public StockEntity insertStock(StockEntity entity) {
 		entity = stockQueryRepo.save(entity);
-		//long count = stockCommonOpRepo.count();
-		//checkForBackUp(count);
+		// long count = stockCommonOpRepo.count();
+		// checkForBackUp(count);
 		return entity;
 
 	}
@@ -74,6 +68,12 @@ public class StockQueryRepoImpl {
 		List<StockEntity> entities = getAllStocks(comCode);
 		details.setStocks(entities);
 		return details;
+	}
+	
+	public StockEntity getLatestStock(String companyCode) {
+		Select selectQuery = QueryBuilder.selectFrom("stock").all()
+				.where(Relation.column("com_code").isEqualTo(QueryBuilder.literal(companyCode))).perPartitionLimit(1);
+		return template.select(selectQuery.asCql(), StockEntity.class).get(0);
 	}
 
 	private List<StockEntity> getAllStocks(String comCode) {

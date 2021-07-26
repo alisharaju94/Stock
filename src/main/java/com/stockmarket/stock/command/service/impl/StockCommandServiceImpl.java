@@ -26,11 +26,4 @@ public class StockCommandServiceImpl implements StockCommandService {
 		return dataMapper.mapToResponseEntity(entity);
 	}
 
-
-	@Override
-	public void delete(String companyCode) {
-//		stockRepoImpl.deleteStocks(companyCode);
-
-	}
-
 }

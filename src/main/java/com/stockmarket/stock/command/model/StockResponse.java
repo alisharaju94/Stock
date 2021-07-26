@@ -3,8 +3,6 @@ package com.stockmarket.stock.command.model;
 import java.io.Serializable;
 import java.util.List;
 
-import com.stockmarket.stock.command.model.Stock;
-
 public class StockResponse implements Serializable {
 
 	private static final long serialVersionUID = 1L;

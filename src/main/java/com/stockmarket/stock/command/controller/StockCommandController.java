@@ -6,10 +6,7 @@ package com.stockmarket.stock.command.controller;
 import java.security.NoSuchAlgorithmException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,10 +39,4 @@ public class StockCommandController {
 		return stockService.addStock(stock, companyCode);
 	}
 	
-	
-	@DeleteMapping(value ="/{companyCode}")
-	public ResponseEntity deleteCompany(@PathVariable String companyCode) {
-		 stockService.delete(companyCode);
-		 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	}
 }

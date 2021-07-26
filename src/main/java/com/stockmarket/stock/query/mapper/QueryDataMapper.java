@@ -1,14 +1,11 @@
 package com.stockmarket.stock.query.mapper;
 
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.google.common.collect.Lists;
 import com.stockmarket.stock.query.entity.StockDetails;
 import com.stockmarket.stock.query.entity.StockEntity;
-import com.stockmarket.stock.query.entity.StockPrimaryKey;
 import com.stockmarket.stock.query.model.Stock;
 import com.stockmarket.stock.query.model.StockResponse;
 
@@ -28,7 +25,7 @@ public class QueryDataMapper {
 
 	public Stock mapToResponseEntity(StockEntity entity) {
 		Stock stock = new Stock();
-		stock.setPrice(entity.getPrimaryKey().getPrice());
+		stock.setPrice(entity.getPrice());
 		stock.setCurrencyCode(entity.getCurrencyCode());
 		stock.setTimeStamp(entity.getPrimaryKey().getTimeStamp());
 		return stock;

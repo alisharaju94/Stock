@@ -9,5 +9,4 @@ public interface StockCommandService {
 
 	Stock addStock(StockRequest stock, String companyCode) throws NoSuchAlgorithmException;
 
-	void delete(String companyCode);
 }
